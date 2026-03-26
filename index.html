@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mylai4 Advisory — Cloud · Data · AI</title>
+<meta name="description" content="Mylai4 Advisory LLC — Strategic cloud, data, and AI advisory for enterprises and startups. Led by Bharath Ramasubban.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0f1a;
+    --paper: #f8f6f1;
+    --accent: #1a6b4e;
+    --accent-light: #e8f3ee;
+    --accent-glow: #22c07b;
+    --warm: #c4956a;
+    --muted: #6b7280;
+    --divider: #ddd8d0;
+    --card-bg: #ffffff;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Outfit', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(248,246,241,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--divider);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.06); }
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-brand span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted);
+    font-size: 0.9rem; font-weight: 500;
+    letter-spacing: 0.03em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .hamburger { display: none; background: none; border: none; cursor: pointer; }
+  .hamburger svg { width: 24px; height: 24px; stroke: var(--ink); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -30%; right: -15%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(26,107,78,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.85rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 32px; height: 2px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    max-width: 780px;
+    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 1.2rem; color: var(--muted);
+    max-width: 540px; margin-top: 1.5rem; font-weight: 300;
+    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+  }
+  .hero-cta {
+    margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.65s forwards;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem; border-radius: 6px;
+    font-family: var(--sans); font-size: 0.95rem; font-weight: 500;
+    text-decoration: none; cursor: pointer; border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+    box-shadow: 0 4px 16px rgba(26,107,78,0.25);
+  }
+  .btn-primary:hover { box-shadow: 0 8px 28px rgba(26,107,78,0.3); }
+  .btn-outline {
+    background: transparent; color: var(--ink);
+    border: 1.5px solid var(--divider);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 3rem; }
+  .section-label {
+    font-size: 0.8rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+  }
+
+  /* ── SERVICES ── */
+  #services { background: var(--card-bg); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem; margin-top: 3rem;
+  }
+  .service-card {
+    padding: 2.5rem 2rem;
+    border: 1px solid var(--divider);
+    border-radius: 10px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .service-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 32px rgba(26,107,78,0.06);
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-glow));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 48px; height: 48px;
+    background: var(--accent-light);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem;
+    color: var(--accent); font-size: 1.3rem;
+  }
+  .service-card h3 {
+    font-family: var(--serif);
+    font-size: 1.25rem; margin-bottom: 0.75rem;
+  }
+  .service-card p {
+    color: var(--muted); font-size: 0.95rem; line-height: 1.65;
+  }
+
+  /* ── CREDENTIALS ── */
+  #credentials { border-top: 1px solid var(--divider); }
+  .cred-intro {
+    font-size: 1.1rem; color: var(--muted);
+    max-width: 640px; margin-bottom: 3rem; font-weight: 300;
+  }
+  .cred-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  .cred-item {
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+    border: 1px solid var(--divider);
+  }
+  .cred-item .num {
+    font-family: var(--serif); font-size: 2rem;
+    color: var(--accent); line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .cred-item .label {
+    font-size: 0.88rem; color: var(--muted);
+    line-height: 1.45;
+  }
+
+  /* ── EXPERIENCE LOGOS ── */
+  .exp-row {
+    margin-top: 3.5rem; padding-top: 2.5rem;
+    border-top: 1px solid var(--divider);
+  }
+  .exp-row-label {
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1.25rem;
+  }
+  .logo-strip {
+    display: flex; flex-wrap: wrap;
+    gap: 2rem; align-items: center;
+  }
+  .logo-pill {
+    font-size: 0.88rem; font-weight: 500;
+    color: var(--muted);
+    padding: 0.5rem 1.25rem;
+    background: var(--accent-light);
+    border-radius: 100px;
+    white-space: nowrap;
+    transition: color 0.2s, background 0.2s;
+  }
+  .logo-pill:hover { color: var(--accent); background: #d1ebe0; }
+
+  /* ── ABOUT ── */
+  #about { background: var(--card-bg); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: start; margin-top: 2rem;
+  }
+  .about-text {
+    font-size: 1.05rem; color: #374151;
+    line-height: 1.8;
+  }
+  .about-text p + p { margin-top: 1.25rem; }
+  .edu-list { list-style: none; margin-top: 2rem; }
+  .edu-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--divider);
+    font-size: 0.95rem; color: var(--muted);
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .edu-list li strong { color: var(--ink); font-weight: 500; }
+  .edu-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    border-top: 1px solid var(--divider);
+    text-align: center;
+    padding: 6rem 3rem 4rem;
+  }
+  #contact .section-title { margin-left: auto; margin-right: auto; }
+  .contact-sub {
+    font-size: 1.1rem; color: var(--muted);
+    max-width: 480px; margin: 0 auto 2.5rem; font-weight: 300;
+  }
+  .contact-email {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .contact-email:hover { border-color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--divider);
+    font-size: 0.82rem; color: var(--muted);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--paper);
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--divider);
+      gap: 1rem;
+    }
+    .hamburger { display: block; }
+    section, .hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .hero { padding-top: 7rem; min-height: auto; padding-bottom: 4rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Mylai<span>4</span> Advisory</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#credentials">Credentials</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Cloud · Data · AI Advisory</div>
+  <h1>Turning complexity into <em>competitive advantage</em></h1>
+  <p class="hero-sub">Strategic advisory for enterprises modernizing with cloud, data platforms, and AI — and for startups building what's next.</p>
+  <div class="hero-cta">
+    <a href="#contact" class="btn btn-primary">Start a Conversation</a>
+    <a href="#services" class="btn btn-outline">What We Do</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">Services</div>
+  <h2 class="section-title">Advisory built at the intersection of strategy and technology</h2>
+  <div class="services-grid">
+
+    <div class="service-card reveal">
+      <div class="service-icon">☁️</div>
+      <h3>Cloud Strategy & Modernization</h3>
+      <p>Architecture assessments, migration roadmaps, and platform selection guidance — grounded in hands-on experience across Azure, AWS, and hybrid environments.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">📊</div>
+      <h3>Data Platform & Analytics</h3>
+      <p>Unified data strategies from lakehouse architecture to real-time intelligence, enabling organizations to move from fragmented data to actionable insight.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">🤖</div>
+      <h3>AI & Intelligent Automation</h3>
+      <p>From agentic AI and multi-agent orchestration to copilot integration, we help you identify high-value AI use cases and build production-ready solutions.</p>
+    </div>
+
+    <div class="service-card reveal">
+      <div class="service-icon">🚀</div>
+      <h3>Startup Mentoring</h3>
+      <p>Hands-on guidance for early-stage startups navigating cloud architecture, go-to-market strategy, and enterprise readiness — having walked both sides of the table.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<section id="credentials">
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title">Two decades of enterprise technology leadership</h2>
+  <p class="cred-intro">From building supply chain platforms to leading strategic accounts at the world's largest technology companies — a track record spanning consulting, product, and cloud.</p>
+  <div class="cred-grid reveal">
+    <div class="cred-item">
+      <div class="num">20+</div>
+      <div class="label">Years in enterprise technology</div>
+    </div>
+    <div class="cred-item">
+      <div class="num">6</div>
+      <div class="label">Industry-leading companies</div>
+    </div>
+    <div class="cred-item">
+      <div class="num">MBA</div>
+      <div class="label">Emory University, Goizueta Business School</div>
+    </div>
+    <div class="cred-item">
+      <div class="num">MS</div>
+      <div class="label">Electrical Engineering, University of Denver</div>
+    </div>
+  </div>
+
+  <div class="exp-row reveal">
+    <div class="exp-row-label">Experience Across</div>
+    <div class="logo-strip">
+      <span class="logo-pill">Microsoft</span>
+      <span class="logo-pill">Amazon Web Services</span>
+      <span class="logo-pill">GE Vernova</span>
+      <span class="logo-pill">Manhattan Associates</span>
+      <span class="logo-pill">Verizon</span>
+      <span class="logo-pill">TCS</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <h2 class="section-title">Led by Bharath Ramasubban</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>Mylai4 Advisory LLC was founded in 2024 with a clear mission: help organizations — from Fortune 500 enterprises to ambitious startups — harness the full potential of cloud, data, and AI.</p>
+      <p>With a career spanning strategic consulting, supply chain technology, cloud platform sales, and digital transformation across companies like Microsoft, AWS, GE, and Manhattan Associates, Bharath brings a rare blend of technical depth and business acumen.</p>
+      <p>The approach is straightforward: understand the business first, then apply the right technology. No jargon for its own sake, no solutions looking for problems — just clear-eyed strategy that drives measurable outcomes.</p>
+    </div>
+    <div class="reveal">
+      <ul class="edu-list">
+        <li><span class="edu-dot"></span><strong>Current</strong> Strategic Account Director, Microsoft — Retail & Consumer Goods</li>
+        <li><span class="edu-dot"></span><strong>Previously</strong> AWS, GE Vernova, Manhattan Associates, Verizon, TCS</li>
+        <li><span class="edu-dot"></span><strong>MBA</strong> Emory University, Goizueta Business School</li>
+        <li><span class="edu-dot"></span><strong>MS</strong> Electrical Engineering, University of Denver</li>
+        <li><span class="edu-dot"></span><strong>Focus Areas</strong> Multi-agent AI, Digital Twins, Supply Chain, Copilot/AI Integration</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Get in Touch</div>
+  <h2 class="section-title">Let's talk about what's possible</h2>
+  <p class="contact-sub">Whether you're a global enterprise exploring AI or a startup building from scratch — reach out.</p>
+  <a href="mailto:bharath@mylai4.com" class="contact-email">bharath@mylai4.com</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2024–2026 Mylai4 Advisory LLC. All rights reserved. Johns Creek, Georgia.
+</footer>
+
+<script>
+  // Scroll shadow on nav
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Close mobile menu on link click
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+</script>
+
+</body>
+</html>
