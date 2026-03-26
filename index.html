@@ -40,11 +40,11 @@
   :root {
     --ink: #0a0f1a;
     --paper: #f8f6f1;
-    --accent: #1a6b4e;
+    --accent: #165c42;
     --accent-light: #e8f3ee;
-    --accent-glow: #22c07b;
+    --accent-glow: #1ea86a;
     --warm: #c4956a;
-    --muted: #6b7280;
+    --muted: #545b64;
     --divider: #ddd8d0;
     --card-bg: #ffffff;
     --serif: 'DM Serif Display', Georgia, serif;
@@ -77,12 +77,12 @@
   nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.06); }
   .nav-brand {
     font-family: var(--serif);
-    font-size: 1.35rem;
+    font-size: 1.65rem;
     color: var(--ink);
     text-decoration: none;
     letter-spacing: -0.02em;
   }
-  .nav-brand span { color: var(--accent); }
+  .nav-brand span { color: var(--accent); font-size: 1.75rem; }
   .nav-links { display: flex; gap: 2rem; list-style: none; }
   .nav-links a {
     text-decoration: none; color: var(--muted);
@@ -227,7 +227,7 @@
     max-width: 640px; margin-bottom: 3rem; font-weight: 300;
   }
   .cred-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: grid; grid-template-columns: repeat(2, minmax(200px, 320px));
     gap: 1.5rem;
   }
   .cred-item {
@@ -326,6 +326,21 @@
     font-size: 0.82rem; color: var(--muted);
   }
 
+  /* ── ACCESSIBILITY ── */
+  .skip-link {
+    position: absolute; left: -9999px; top: auto;
+    padding: 0.5rem 1rem; background: var(--accent); color: #fff;
+    font-size: 0.9rem; border-radius: 0 0 6px 0; z-index: 200;
+    text-decoration: none;
+  }
+  .skip-link:focus { left: 0; top: 0; }
+
+  *:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
@@ -338,6 +353,16 @@
   }
   .reveal.visible {
     opacity: 1; transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
   }
 
   /* ── RESPONSIVE ── */
@@ -361,8 +386,11 @@
 </head>
 <body>
 
+<!-- Skip Link -->
+<a href="#services" class="skip-link">Skip to content</a>
+
 <!-- NAV -->
-<nav>
+<nav role="navigation" aria-label="Main navigation">
   <a href="#" class="nav-brand">Mylai<span>4</span> Advisory</a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#services">Services</a></li>
@@ -393,25 +421,25 @@
   <div class="services-grid">
 
     <div class="service-card reveal">
-      <div class="service-icon">📊</div>
+      <div class="service-icon" aria-hidden="true">📊</div>
       <h3>Data Strategy & Platforms</h3>
       <p>From lakehouse architecture and Microsoft Fabric to real-time analytics — helping organizations unify fragmented data into a foundation for AI-driven decisions.</p>
     </div>
 
     <div class="service-card reveal">
-      <div class="service-icon">🤖</div>
+      <div class="service-icon" aria-hidden="true">🤖</div>
       <h3>AI & Intelligent Automation</h3>
       <p>Identifying high-ROI AI use cases across supply chain, manufacturing, and retail. From agentic AI and multi-agent orchestration to copilot integration — practical solutions, not science projects.</p>
     </div>
 
     <div class="service-card reveal">
-      <div class="service-icon">🚀</div>
+      <div class="service-icon" aria-hidden="true">🚀</div>
       <h3>Go-to-Market & Transformation</h3>
       <p>Battle-tested guidance on driving large-scale digital transformations. GTM strategy, enterprise readiness, and the operational playbooks that turn technology investments into measurable outcomes.</p>
     </div>
 
     <div class="service-card reveal">
-      <div class="service-icon">💡</div>
+      <div class="service-icon" aria-hidden="true">💡</div>
       <h3>Startup Mentoring</h3>
       <p>Hands-on advisory for early-stage startups navigating cloud architecture, investor-ready positioning, and enterprise sales readiness — from someone who's sat on both sides of the table.</p>
     </div>
